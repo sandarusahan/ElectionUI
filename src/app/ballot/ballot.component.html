@@ -1,0 +1,39 @@
+<div class="jumbotron jumbotron-fluid">
+  <div id="baltittle" class="container">
+    <h1 class="display">E-Ballot</h1>
+    <p class="lead">This is your ballot to cast your vote. Use your vote wise !!</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card mb-3" *ngFor="let p of parties" (click)="cardOnClick(p.id)">
+    <img class="card-img-top" [src]="p.img" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{p.name}}</h5>
+    </div>
+  </div>
+
+  <!-- <div class="card mb-3" (click)="cardOnClick($event)">
+      <img class="card-img-top" src="../../assets/SLFP.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Sri Lanka Freedom Party</h5>
+      </div>
+  </div>
+
+  <div class="card mb-3" (click)="cardOnClick($event)">
+    <img class="card-img-top" src="../../assets/JHU logo.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Jathika Hela Urumaya</h5>
+    </div>
+  </div>
+
+  <div class="card mb-3" (click)="cardOnClick($event)">
+      <img class="card-img-top" src="../../assets/unp logo.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">United National Party</h5>
+      </div>
+  </div> -->
+  
+  <a href="" class="btn btn-primary">Cast Your Ballot</a>
+</div>
+

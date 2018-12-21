@@ -1,0 +1,8 @@
+.mycarousel {
+    height: 600px;
+    width: 100%
+}
+
+ngb-carousel {
+    margin-bottom: 50px;
+}

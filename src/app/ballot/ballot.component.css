@@ -1,0 +1,34 @@
+#baltittle {
+    height: 3vh;
+}
+
+.card-body {
+    height: 5vh;
+}
+
+.card-img-top {
+    height: 12vh;
+}
+ 
+.card-title {
+    margin-top: -1vh;
+    text-align: center;
+}
+
+img {
+    background-size: cover
+ }
+
+ .card:hover {
+    -ms-transform: scale(1.025); /* IE 9 */
+  -webkit-transform: scale(1.025); /* Safari 3-8 */
+  transform: scale(1.025); 
+ }
+
+ .card:active {
+  transform: scale(0.95); 
+ }
+
+ a {
+     width: 100%;
+ }
