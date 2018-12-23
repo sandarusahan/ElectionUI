@@ -1,3 +1,10 @@
-<p>
-  vote-summary works!
-</p>
+<div class="container">
+<div class="jumbotron">
+    <h1 class="display-4">You have marked your votes for,</h1>
+    <p class="lead">{{partyName}}</p>
+    <hr class="my-4">
+    <p *ngFor="let p of prefVotes">{{p.pName}}</p>
+    <a class="btn btn-success btn-lg" href="#" role="button">Confirm and Cast in to vote box</a>
+    <a class="btn btn-primary btn-lg" id="editbtn" routerLink="../ballot" role="button">Edit vote</a>
+  </div>
+</div>
