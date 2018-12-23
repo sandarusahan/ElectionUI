@@ -6,34 +6,18 @@
 </div>
 
 <div class="container">
-  <div class="card mb-3" *ngFor="let p of parties" (click)="cardOnClick(p.id)">
+  <div class="card mb-3" *ngFor="let p of parties" [class.active]="p.id === isActive" (click)="cardOnClick(p)">
     <img class="card-img-top" [src]="p.img" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{p.name}}</h5>
+      <h4 class="card-desc" style="flood-opacity: 1;"><b>{{msg}}</b></h4>
     </div>
   </div>
 
-  <!-- <div class="card mb-3" (click)="cardOnClick($event)">
-      <img class="card-img-top" src="../../assets/SLFP.jpg" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Sri Lanka Freedom Party</h5>
-      </div>
+  <div>
+    <span class="btn btn-danger"><b>1</b></span>
   </div>
-
-  <div class="card mb-3" (click)="cardOnClick($event)">
-    <img class="card-img-top" src="../../assets/JHU logo.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Jathika Hela Urumaya</h5>
-    </div>
-  </div>
-
-  <div class="card mb-3" (click)="cardOnClick($event)">
-      <img class="card-img-top" src="../../assets/unp logo.jpg" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">United National Party</h5>
-      </div>
-  </div> -->
-  
+<br>
   <a href="" class="btn btn-primary">Cast Your Ballot</a>
 </div>
 

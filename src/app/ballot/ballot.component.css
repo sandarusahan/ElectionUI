@@ -3,7 +3,8 @@
 }
 
 .card-body {
-    height: 5vh;
+    height: 6vh;
+    background-color: rgb(223, 221, 221)
 }
 
 .card-img-top {
@@ -20,15 +21,42 @@ img {
  }
 
  .card:hover {
-    -ms-transform: scale(1.025); /* IE 9 */
-  -webkit-transform: scale(1.025); /* Safari 3-8 */
-  transform: scale(1.025); 
+    transform: scale(1.025); 
+    opacity: 0.8;
+ }
+
+ .card:hover .card-desc {
+     visibility: visible;
+     opacity: 1;
+     text-align: center;
+     color: red;
  }
 
  .card:active {
-  transform: scale(0.95); 
+    transform: scale(0.95); 
+ }
+
+ .active {
+    transform: scale(0.95); 
+    color: purple;
+    /* opacity: 0.6; */
+ }
+
+ .active .card-img-top {
+     opacity: 0.6;
+ }
+
+ .active .card-desc {
+     visibility: visible;
+     text-align: center;
+     color:rgb(0, 0, 0);
  }
 
  a {
      width: 100%;
+ }
+
+ .card-desc {
+     visibility: hidden;
+     margin-top: -10vh;
  }

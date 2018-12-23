@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { BallotComponent } from './ballot/ballot.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { NumToArrPipe } from './num-to-arr.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     HomeComponent,
     CarouselComponent,
     BallotComponent,
-    NavbarComponent
+    NavbarComponent,
+    NumToArrPipe
   ],
   imports: [
     BrowserModule,
