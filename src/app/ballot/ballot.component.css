@@ -1,6 +1,4 @@
-#baltittle {
-    height: 3vh;
-}
+
 
 .card-body {
     height: 6vh;
@@ -59,4 +57,25 @@ img {
  .card-desc {
      visibility: hidden;
      margin-top: -10vh;
+ }
+
+ .btn-danger {
+     font-size: 2em;
+     margin: 0.7vw;
+     width: 2em;
+     height: 2.2em;
+     transition: transform 0.9s;
+ }
+
+ /* .btn-danger:hover {
+     transition: transform 0.9s;
+     transform : scale(4);
+     opacity: 0.65;
+    background-attachment: 
+ } */
+
+
+ .active-span {
+     opacity: 0.5;
+    transform: scale(0.77);
  }

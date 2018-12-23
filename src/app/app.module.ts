@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +11,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { BallotComponent } from './ballot/ballot.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NumToArrPipe } from './num-to-arr.pipe';
+import { VoteSummaryComponent } from './vote-summary/vote-summary.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +20,14 @@ import { NumToArrPipe } from './num-to-arr.pipe';
     CarouselComponent,
     BallotComponent,
     NavbarComponent,
-    NumToArrPipe
+    NumToArrPipe,
+    VoteSummaryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

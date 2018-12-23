@@ -14,10 +14,14 @@
     </div>
   </div>
 
-  <div>
-    <span class="btn btn-danger"><b>1</b></span>
-  </div>
-<br>
-  <a href="" class="btn btn-primary">Cast Your Ballot</a>
 </div>
 
+  <div class="container">
+    <h5>Preferencial votes : {{3 - votes}}</h5>
+    <div>
+      <span class="btn btn-danger" *ngFor="let x of prefvotes" (click)="spanOnClick(x)" [ngClass]="{'active-span': selectedVotes.includes(x)}"  ngbPopover="{{x.title}}" triggers="mouseenter:mouseleave" popoverTitle="{{x.pName}}">{{x.number}}</span>
+    </div>
+    <br>
+    <a href="" class="btn btn-primary btn-lg">Cast Your Ballot</a>
+  </div>
+  
