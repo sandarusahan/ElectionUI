@@ -1,5 +1,11 @@
 export interface PrefVote {
+    // id:string
+    // electionId: string
     number: number;
-    pName: string;
-    title: string;
+    // partyId: string;
+    // politicianId: string;
+    // divisionId: string;
+    pName:string
+    title :string
+
 }

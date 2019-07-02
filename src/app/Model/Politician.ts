@@ -1,7 +1,11 @@
 export interface Politician {
-    id : string;
+    politicianId : string;
     name : string;
+    party : string;
     role : string;
-    prefNo : number;
-    title : string;
+    officeContact : number;
+    officeAddress : string;
+    division : string;
+    bio : string;
+
 }

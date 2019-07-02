@@ -1,0 +1,25 @@
+
+
+<div class="container mt-3">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Date/Time</th>
+      <th scope="col">Entry Type</th>
+      <th scope="col">Participant</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let txn of sortData; let i = index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{txn.transactionTimestamp|date:'medium'}}</td>
+      <td>{{txn.transactionType|rmvNs:"org.hyperledger.composer.system.":"org.evotedapp.biznet."}}</td>
+      <td>{{txn.participantInvoking|rmvNs:"resource:org.hyperledger.composer.system.NetworkAdmin#"}}</td>
+      <td><button class="btn btn-primary btn-sm">View Details</button></td>
+    </tr>
+    
+  </tbody>
+</table>
+</div>

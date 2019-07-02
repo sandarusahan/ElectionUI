@@ -1,20 +1,29 @@
 
 <header>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">Carousel</a>
+    <a class="navbar-brand" routerLink="">SL Election</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink="">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" routerLink="current-elections">Election</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+        <li ngbDropdown class="nav-item dropdown">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Admin
+          </a>
+          <div ngbDropdownMenu aria-labelledby="dropdownManual">
+            <a class="dropdown-item" href="#">Setup an election</a>
+            <a class="dropdown-item" routerLink="elections">View Elections</a>
+            <a class="dropdown-item" routerLink="politicians">View Politicians</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="transactions">View All Transactions</a>
+          </div>
         </li>
       </ul>
       <form class="form-inline mt-2 mt-md-0">
