@@ -6,16 +6,16 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
-      <th scope="col">Party</th>
+      <!-- <th scope="col">Party</th> -->
       <th scope="col">Role</th>
       <th scope="col">Contact</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let politician of politicians; let i = index">
-      <th scope="row">{{i}}</th>
+      <th scope="row">{{i+1}}</th>
       <td>{{politician.name}}</td>
-      <td>{{politician.party}}</td>
+      <!-- <td>{{politician.party}}</td> -->
       <td>{{politician.role}}</td>
       <td>{{politician.officeContact}}</td>
     </tr>

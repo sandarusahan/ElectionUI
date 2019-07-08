@@ -1,3 +1,4 @@
+import { NewElectionComponent } from './new-election/new-election.component';
 import { ViewAllTransactionsComponent } from './view-all-transactions/view-all-transactions.component';
 import { CurrentElectionComponent } from './current-election/current-election.component';
 import { ElectionsComponent } from './elections/elections.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'current-elections', component: CurrentElectionComponent},
   {path: 'transactions', component: ViewAllTransactionsComponent},
   {path: 'elections', component: ElectionsComponent},
+  {path: 'new-election', component: NewElectionComponent},
   {path: 'voting/ballot', component: BallotComponent },
   {path: 'voting/summary', component: VoteSummaryComponent }
 

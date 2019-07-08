@@ -17,6 +17,7 @@ import { ElectionsComponent } from './elections/elections.component';
 import { CurrentElectionComponent } from './current-election/current-election.component';
 import { ViewAllTransactionsComponent } from './view-all-transactions/view-all-transactions.component';
 import { RemoveNamespacePipe } from './remove-namespace.pipe';
+import { NewElectionComponent } from './new-election/new-election.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { RemoveNamespacePipe } from './remove-namespace.pipe';
     ElectionsComponent,
     CurrentElectionComponent,
     ViewAllTransactionsComponent,
-    RemoveNamespacePipe
+    RemoveNamespacePipe,
+    NewElectionComponent
   ],
   imports: [
     BrowserModule,
