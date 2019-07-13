@@ -5,6 +5,16 @@
     margin-bottom: 1rem;
 }
 
+#sub-btn {
+    width: 15rem;
+    margin-bottom: 1rem;
+}
+
+#nxt-btn{
+    width:8rem;
+    margin-left: 10rem;
+}
+
 .active {
     transform: scale(0.95);
     font-weight: bolder; 

@@ -1,3 +1,4 @@
+import { ElectionService } from './../Services/election.service';
 import { Time } from '@angular/common';
 import { Election } from '../Model/Election';
 import { PoliticianService } from '../Services/politician.service';
@@ -20,8 +21,12 @@ export class NewElectionComponent implements OnInit {
   meridian = true;
   electionDate:Date;
   name:string;
+  wizPage:number = 0;
+  candidates:String[] = [];
 
-  constructor(private politicianService:PoliticianService, private generator:IdGenerateService) { }
+  election:Election;
+
+  constructor(private politicianService:PoliticianService, private generator:IdGenerateService, private electionService:ElectionService) { }
 
   ngOnInit() {
     // this.election = new Election();
@@ -56,23 +61,48 @@ export class NewElectionComponent implements OnInit {
   }
 
   addToArr(){
-    this.politicians = this.selectedPoliticians;
+    this.selectedPoliticians.forEach(politician => {
+      this.candidates.push("org.evotedapp.biznet.Politician#"+politician.politicianId)
+    })
+    
   }
 
   onSubmit(){
     let election = new Election();
+    election.$class="org.evotedapp.biznet.NewElectionTransaction"
     election.electionId = "el"+this.generator.generate();
     election.name = this.name;
-    election.candidates = this.politicians;
-    election.startTime = <Time> new Object()
-    election.endTime = <Time> new Object()
-    election.startTime.hours = this.startTime.hour;
-    election.startTime.minutes = this.startTime.minute;
-    election.endTime.hours = this.endTime.hour;
-    election.endTime.minutes = this.endTime.minute;
-    election.commissioner = "Commissioner";
+    election.candidates = this.candidates;
+    election.startTime = <Date> new Date(this.electionDate)
+    election.endTime = <Date> new Date(this.electionDate)
+    election.startTime.setHours(this.startTime.hour, this.startTime.minute);
+    election.startTime.setMinutes(this.startTime.minute);
+    election.endTime.setHours(this.endTime.hour);
+    election.endTime.setMinutes(this.endTime.minute);
+    election.commissioner = "org.evotedapp.biznet.ElectionCommissioner#com0001";
     election.electionDate = this.electionDate;
-    
     console.log(election)
+    this.election = election;
+    this.electionService.newElection(election).subscribe(elec => {
+      console.log(elec)
+    }, err => {
+      console.log(err)
+    })
+  }
+
+  nextBtn(){
+    if(this.wizPage<2)
+    this.wizPage++;
+    this.addToArr();
+
+    console.log(this.wizPage)
+  }
+
+  prevBtn(){
+    if(this.wizPage>0){
+      this.wizPage--;
+    }
+    console.log(this.wizPage)
+
   }
 }

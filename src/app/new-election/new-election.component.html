@@ -1,135 +1,161 @@
+
 <form class="container">
-
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" aria-describedby="emailHelp"
-      placeholder="Enter a name for the election" [(ngModel)]="name" name="name">
-    <small id="nameHelp" class="form-text text-muted">Make the name unique, It'll be easy to find this next time with
-      this name</small>
+  <div class="progress">
+    <div class="progress-bar bg-info" role="progressbar" [style.width.%]="(this.wizPage+1)*33.333333" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
   </div>
+  <br>
+  <div class="container" *ngIf="wizPage==0">
+      <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" aria-describedby="emailHelp"
+            placeholder="Enter a name for the election" [(ngModel)]="name" name="name">
+          <small id="nameHelp" class="form-text text-muted">Make the name unique, It'll be easy to find this next time with
+            this name</small>
+        </div>
+      
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="electionDate">Election Date</label>
+              <input type="date" [(ngModel)]="electionDate" class="form-control" id="electionDate" aria-describedby="selectionDatehelp"
+                name="electionDate">
+              <small id="electionDatehelp" class="form-text text-muted">Specify the date and time that election should be
+                started</small>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="startTime">Start at</label>
+              <!-- <input type="time" class="form-control" id="startDateTime" aria-describedby="startDateTimehelp" name="startDateTime" placeholder="Starting at"> -->
+              <ngb-timepicker [(ngModel)]="startTime" [meridian]="meridian" name="startTime"></ngb-timepicker>
+              <button class="btn btn-sm btn-outline-{{meridian ? 'success' : 'danger'}}" (click)="toggleMeridian()">
+                Meridian - {{meridian ? "ON" : "OFF"}}
+              </button>
+              <small id="startTimehelp" class="form-text text-muted">Specify the time that election should be
+                started</small>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="endTime">End at</label>
+              <ngb-timepicker [(ngModel)]="endTime" [meridian]="meridian" name="endTime"></ngb-timepicker>
+              <button class="btn btn-sm btn-outline-{{meridian ? 'success' : 'danger'}}" (click)="toggleMeridian()">
+                Meridian - {{meridian ? "ON" : "OFF"}}
+              </button>
+              <small id="endTimehelp" class="form-text text-muted">Specify the time that election should be ended</small>
+            </div>
+          </div>
+        </div>
+  </div>
+  <div class="container" *ngIf="wizPage==1">
+    <!-- Button trigger modal -->
+<!-- <button id="candi-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+    Choose Candidates
+  </button> -->
+  
+  <!-- Modal -->
+  <!-- <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Candidates</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addToArr()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
 
+  <h3>Choose Candidates</h3>
   <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="electionDate">Election Date</label>
-        <input type="date" [(ngModel)]="electionDate" class="form-control" id="electionDate" aria-describedby="selectionDatehelp"
-          name="electionDate">
-        <small id="electionDatehelp" class="form-text text-muted">Specify the date and time that election should be
-          started</small>
-      </div>
+    <div class="col-7">
+        <table *ngIf="politicians" class="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Party</th>
+                <th scope="col">Division</th>
+              </tr>
+            </thead>
+            <tbody> 
+              <tr *ngFor="let politcian of selectedPoliticians; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{politcian.name}}</td>
+                <td>{{politcian.party}}</td>
+                <td>{{politcian.electoralDivisionew}}</td>
+              </tr>
+              
+            </tbody>
+          </table>
     </div>
     <div class="col">
-      <div class="form-group">
-        <label for="startTime">Start at</label>
-        <!-- <input type="time" class="form-control" id="startDateTime" aria-describedby="startDateTimehelp" name="startDateTime" placeholder="Starting at"> -->
-        <ngb-timepicker [(ngModel)]="startTime" [meridian]="meridian" name="startTime"></ngb-timepicker>
-        <button class="btn btn-sm btn-outline-{{meridian ? 'success' : 'danger'}}" (click)="toggleMeridian()">
-          Meridian - {{meridian ? "ON" : "OFF"}}
-        </button>
-        <small id="startTimehelp" class="form-text text-muted">Specify the time that election should be
-          started</small>
-      </div>
-    </div>
-    <div class="col">
-      <div class="form-group">
-        <label for="endTime">End at</label>
-        <ngb-timepicker [(ngModel)]="endTime" [meridian]="meridian" name="endTime"></ngb-timepicker>
-        <button class="btn btn-sm btn-outline-{{meridian ? 'success' : 'danger'}}" (click)="toggleMeridian()">
-          Meridian - {{meridian ? "ON" : "OFF"}}
-        </button>
-        <small id="endTimehelp" class="form-text text-muted">Specify the time that election should be ended</small>
-      </div>
-    </div>
-  </div>
-<!-- Button trigger modal -->
-<button id="candi-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
-  Choose Candidates
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Candidates</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <!-- <th scope="col">Party</th> -->
-              <th scope="col">Role</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let politician of allPoliticians; let i = index" [class.active]="isExist(politician.politicianId)" (click)="onSelect(i)">
-              <th scope="row">{{i+1}}</th>
-              <td>{{politician.name}}</td>
-              <!-- <td>{{politician.party}}</td> -->
-              <td>{{politician.role}}</td>  
-            </tr>
-            
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addToArr()">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-  <div class="row">
-    <div class="col">
-      <table *ngIf="politicians" class="table table-sm">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">Party</th>
-            <th scope="col">Division</th>
+            <!-- <th scope="col">Party</th> -->
+            <th scope="col">Role</th>
           </tr>
         </thead>
-        <tbody> 
-          <tr *ngFor="let politcian of politicians; let i = index">
+        <tbody>
+          <tr *ngFor="let politician of allPoliticians; let i = index" [class.active]="isExist(politician.politicianId)" (click)="onSelect(i)">
             <th scope="row">{{i+1}}</th>
-            <td>{{politcian.name}}</td>
-            <td>{{politcian.party}}</td>
-            <td>{{politcian.electoralDivisionew}}</td>
+            <td>{{politician.name}}</td>
+            <!-- <td>{{politician.party}}</td> -->
+            <td>{{politician.role}}</td>  
           </tr>
           
         </tbody>
       </table>
     </div>
-    <!-- <div class="col">
-      <table class="table table-sm">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          
-        </tbody>
-      </table>
-    </div> -->
   </div>
+  
 
+  
+  </div>
+  <div *ngIf="wizPage == 2" class="container">
+      <table class="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            
+          </tbody>
+        </table>
 
-  <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit</button>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-secondary" (click)="prevBtn()" [disabled]="wizPage == 0">Previous</button>
+    </div>
+    <div class="col">
+      <button id="sub-btn" type="submit" (click)="onSubmit()" class="btn btn-primary" [disabled]="wizPage != 2">Submit</button>      
+    </div>
+    <div class="col">
+      <button id="nxt-btn" class="btn btn-secondary" (click)="nextBtn()" [disabled]="wizPage == 2">Next</button>
+    </div>
+  </div>
 </form>
+
+<pre>Selected time: {{election | json}}</pre> 

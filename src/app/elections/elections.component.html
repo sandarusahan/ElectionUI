@@ -13,10 +13,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let election of elections; let i = index">
-      <th scope="row">{{i}}</th>
+      <th scope="row">{{i+1}}</th>
       <td>{{election.name}}</td>
-      <td>{{election.startDateTime}}</td>
-      <td>{{election.endDateTime}}</td>
+      <td>{{election.startTime| date:'medium'}}</td>
+      <td>{{election.endTime| date:'medium'}}</td>
       <td>{{election.electionStatus}}</td>
     </tr>
     

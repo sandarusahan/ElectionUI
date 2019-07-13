@@ -8,9 +8,14 @@ import { Injectable } from '@angular/core';
 export class ElectionService {
 
   url = "http://localhost:3000/api/Election"
+  urlTxn = "http://localhost:3000/api/NewElectionTransaction"
   constructor(private http:HttpClient) { }
 
   viewAllElections(){
     return this.http.get<Election[]>(this.url)
+  }
+
+  newElection(election:Election){
+    return this.http.post<Election>(this.urlTxn, election)
   }
 }
