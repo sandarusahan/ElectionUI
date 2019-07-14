@@ -1,3 +1,24 @@
-<p>
-  current-election works!
-</p>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Current Elections</h1>
+      <p class="lead">Displays all the ongoing elections & elections yet to start.</p>
+    </div>
+  </div>
+<div class="container mt-5">
+
+  <div class="mb-3" *ngFor="let election of filteredElections; let i = index">
+    <div class="card text-center">
+      <div class="card-header">
+        {{election.electionStatus}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{election.name}}</h5>
+        <p class="card-text">This election was created at 20/06/2019 by commisioner Mr. Mahinda Deshapriya</p>
+        <a [routerLink]="[ '/voting/ballot', election.electionId ]" class="btn btn-primary">Start Voting</a>
+      </div>
+      <div class="card-footer text-muted">
+        {{election.startTime| date:'medium'}}
+      </div>
+    </div>
+  </div>
+</div>

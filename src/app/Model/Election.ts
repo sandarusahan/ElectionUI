@@ -11,5 +11,5 @@ export class Election {
   electionStatus:string
   commissioner:string
   parties:string[]
-  candidates:String[]
+  candidates:string[]
 }

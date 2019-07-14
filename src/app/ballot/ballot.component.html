@@ -6,10 +6,10 @@
 </div>
 
 <div class="container">
-  <div class="card mb-3" *ngFor="let p of parties" [class.active]="p.id === activePartyId" (click)="cardOnClick(p)">
-    <img class="card-img-top" [src]="p.Image" alt="Card image cap">
+  <div class="card mb-3" *ngFor="let c of candidates" [class.active]="c.politicianId === activePartyId" (click)="cardOnClick(p)">
+    <img class="card-img-top" [src]="c.image" alt="Candidate image not availble">
     <div class="card-body">
-      <h5 class="card-title">{{p.name}}</h5>
+      <h5 class="card-title">{{c.name}}</h5>
       <h4 class="card-desc" style="flood-opacity: 1;"><b>{{msg}}</b></h4>
     </div>
   </div>

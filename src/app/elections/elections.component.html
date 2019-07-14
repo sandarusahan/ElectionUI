@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let election of elections; let i = index">
+    <tr *ngFor="let election of sortData; let i = index">
       <th scope="row">{{i+1}}</th>
       <td>{{election.name}}</td>
       <td>{{election.startTime| date:'medium'}}</td>

@@ -1,9 +1,15 @@
+import { PoliticianService } from './../Services/politician.service';
+import { RemoveNamespaceService } from './../remove-namespace.service';
+import { Politician } from './../Model/Politician';
+import { Election } from './../Model/Election';
+import { ElectionService } from './../Services/election.service';
 import { BallotService } from '../Services/ballot.service';
 import { DataService } from './../data.service';
 import { Vote } from './../Model/Vote';
 import { PrefVote } from './../Model/PrefVote';
 import { Party } from '../Model/Party';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ballot',
@@ -18,59 +24,48 @@ export class BallotComponent implements OnInit {
   votes = 0;
   msg = "Click to mark your vote"
 
-  party;
+  election:Election;
+  candidates:Politician[] = []
+  candidatesIds:string[] = []
 
-  constructor(private data : DataService, private ballot : BallotService) { }
+  constructor(private data : DataService, private ballot : BallotService, private route:ActivatedRoute, private electionService:ElectionService, private removeNSService:RemoveNamespaceService, private politicianService:PoliticianService) { }
 
 
-  // parties : Party[] = [{id : "prty001", name : "Sri Lanka Podujana Peramuna", , , ,desc : "Sri Lanka Podujana Peramuna", img : "../../assets/Podujana_Peramuna_logo.jpg"}, {id : "prty002", name : "Sri Lanka Freedom Party", desc : "Sri Lanka Freedom Party", img : "../../assets/SLFP.jpg"}, {id : "prty003", name : "Jathika Hela Urumaya", desc : "Jathika Hela Urumaya", img : "../../assets/JHU logo.jpg"}, {id : "prty004", name : "United National Party", desc : "United National Party", img : "../../assets/unp logo.jpg"}]
-  prefvotes : PrefVote[] = [{number : 1, pName : "Mahinda rajapaksa", title:"Former President of Sri Lanka"}, {number : 2, pName : "Ranil Wikramasinghe", title:"Priminister of Sri Lanka"}, {number : 3, pName : "Namal Rajapaksa", title:"Parliment member of Sri Lanka"}, {number : 4, pName : "ooskdmfks", title:"lskmdvlskd of Sri Lanka"} , {number : 5, pName : "sd;km;sd", title:"Parliment member of Sri Lanka"}]
-  selectedVotes: PrefVote[] = [];
-  parties
-  // prefVotes 
   ngOnInit() { 
-    // this.parties.sort((a,b) => a.name.localeCompare(b.name));
-    this.ballot.getParties().subscribe(res=> {
-      console.log(res)
-      this.parties = res;
-    });
+   
+    this.route.paramMap.subscribe(param => {
+      let id = param.get('electionId');
+      this.electionService.getElection(id).subscribe(election => {
+        this.election = election;
+        this.candidatesIds = []
+        this.election.candidates.forEach(candidate => this.candidatesIds.push(this.removeNSService.transform(candidate, "resource:org.evotedapp.biznet.Politician#")))
+        
+      })
+    })
 
-    // this.ballot.getPoliticians().subscribe(res=> {
-    //   this.prefVotes = res;
-    // })
-
-    // this.ballot.getPrefVote().subscribe(res=> {
-    //     this.prefVotes = res;
-    //   })
+    this.politicianService.getAllPoliticians().subscribe(politicians => {
+      this.candidates = []
+      this.candidatesIds.forEach(poliId => {
+        this.candidates.push(politicians.find(x => x.politicianId == poliId))
+      })
+    })
   }
   
-  cardOnClick(party) {
+  // cardOnClick(candidate) {
     
-    this.party = party;
-    this.activePartyId = party.id;
-    this.msg = party.name + " is marked as voted";
-  }
+  //   this.party = party;
+  //   this.activePartyId = party.id;
+  //   this.msg = party.name + " is marked as voted";
+  // }
 
-  spanOnClick(x) {
-    
-    if(this.selectedVotes.includes(x)){
-      this.selectedVotes.splice(this.selectedVotes.indexOf(x), 1);
-      this.votes = this.selectedVotes.length;
-    }
-    else {
-      if(this.selectedVotes.length<3){
-      this.selectedVotes.push(x);
-      this.votes = this.selectedVotes.length;
-      }     
-    }
-  }
+ 
 
   submitVote()  {
     let vote = new Vote();
 
     // vote.partyid = this.activePartyId;
-    vote.party = this.party;
-    vote.prefVotes = this.selectedVotes;
+    // vote.party = this.party;
+    // vote.prefVotes = this.selectedVotes;
     
     this.data.sendData(vote);
   }

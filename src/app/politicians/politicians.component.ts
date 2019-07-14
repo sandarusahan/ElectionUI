@@ -15,6 +15,7 @@ export class PoliticiansComponent implements OnInit {
   ngOnInit() {
     this.politicianService.getAllPoliticians().subscribe(politicians => {
       this.politicians = politicians;
+      console.log(politicians)
     })
   }
 

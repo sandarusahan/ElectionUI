@@ -15,6 +15,10 @@ export class ElectionService {
     return this.http.get<Election[]>(this.url)
   }
 
+  getElection(id){
+    return this.http.get<Election>(this.url+"/"+id)
+  }
+
   newElection(election:Election){
     return this.http.post<Election>(this.urlTxn, election)
   }

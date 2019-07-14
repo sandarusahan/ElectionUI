@@ -18,4 +18,9 @@ export class ElectionsComponent implements OnInit {
     })
   }
 
+  get sortData() {
+    return this.elections.sort((a, b) => {
+      return <any>new Date(b.startTime) - <any>new Date(a.startTime);
+    });
+  }
 }

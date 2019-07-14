@@ -19,6 +19,7 @@ import { ViewAllTransactionsComponent } from './view-all-transactions/view-all-t
 import { RemoveNamespacePipe } from './remove-namespace.pipe';
 import { NewElectionComponent } from './new-election/new-election.component';
 import { PolingStationComponent } from './poling-station/poling-station.component';
+import { DivisionComponent } from './division/division.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PolingStationComponent } from './poling-station/poling-station.componen
     ViewAllTransactionsComponent,
     RemoveNamespacePipe,
     NewElectionComponent,
-    PolingStationComponent
+    PolingStationComponent,
+    DivisionComponent
   ],
   imports: [
     BrowserModule,

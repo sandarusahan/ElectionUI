@@ -22,7 +22,7 @@ export class NewElectionComponent implements OnInit {
   electionDate:Date;
   name:string;
   wizPage:number = 0;
-  candidates:String[] = [];
+  candidates:string[] = [];
 
   election:Election;
 

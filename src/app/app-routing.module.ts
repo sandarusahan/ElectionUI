@@ -1,3 +1,5 @@
+import { DivisionComponent } from './division/division.component';
+import { PolingStationComponent } from './poling-station/poling-station.component';
 import { NewElectionComponent } from './new-election/new-election.component';
 import { ViewAllTransactionsComponent } from './view-all-transactions/view-all-transactions.component';
 import { CurrentElectionComponent } from './current-election/current-election.component';
@@ -12,11 +14,13 @@ import { VoteSummaryComponent } from './vote-summary/vote-summary.component';
 const routes: Routes = [
   {path: '', component: HomeComponent },
   {path: 'politicians', component: PoliticiansComponent},
+  {path: 'polling-station', component: PolingStationComponent},
+  {path: 'division', component: DivisionComponent},
   {path: 'current-elections', component: CurrentElectionComponent},
   {path: 'transactions', component: ViewAllTransactionsComponent},
   {path: 'elections', component: ElectionsComponent},
   {path: 'new-election', component: NewElectionComponent},
-  {path: 'voting/ballot', component: BallotComponent },
+  {path: 'voting/ballot/:electionId', component: BallotComponent },
   {path: 'voting/summary', component: VoteSummaryComponent }
 
 ];
