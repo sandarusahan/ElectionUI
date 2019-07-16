@@ -24,6 +24,9 @@ export class NewElectionComponent implements OnInit {
   wizPage:number = 0;
   candidates:string[] = [];
 
+  success:boolean = false
+  failed:boolean = false
+  loading:boolean = false
   election:Election;
 
   constructor(private politicianService:PoliticianService, private generator:IdGenerateService, private electionService:ElectionService) { }
@@ -85,7 +88,12 @@ export class NewElectionComponent implements OnInit {
     this.election = election;
     this.electionService.newElection(election).subscribe(elec => {
       console.log(elec)
+      this.success = true;
+      this.loading = false;
     }, err => {
+      this.failed = true
+      this.loading = false;
+
       console.log(err)
     })
   }

@@ -1,3 +1,6 @@
+import { Division } from './../Model/Division';
+import { IdGenerateService } from './../Services/id-generate.service';
+import { DivisionService } from './../Services/division.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DivisionComponent implements OnInit {
 
-  constructor() { }
+  success:boolean = false
+  failed:boolean = false
+  loading:boolean = false
+  division:Division = new Division()
+  constructor(private divisionService:DivisionService, private idService:IdGenerateService) { }
 
   ngOnInit() {
+  }
+
+  onSubmit(){
+    this.loading = true;
+   this.division.$class = "org.evotedapp.biznet.Division"
+    this.division.divisionId = "div"+this.idService.generate()
+    this.divisionService.addNewDivision(this.division).subscribe(div => 
+      {
+        this.success = true;
+        this.loading = false;
+        this.division.name = ""
+        console.log(div)
+      }, err => {
+        this.failed = true
+        this.loading = false;
+      })
   }
 
 }

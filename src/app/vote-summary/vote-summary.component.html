@@ -5,6 +5,11 @@
     <hr class="my-4">
     <p *ngFor="let p of prefVotes">{{p.pName}}</p>
     <a class="btn btn-success btn-lg" (click)="onCastBallot()" role="button">Confirm and Cast in to vote box</a>
+    <span  class=" p-2"><i *ngIf="success" class="fas fa-check-circle text-success"></i><i *ngIf="failed" class="fas fa-exclamation-circle text-danger"></i></span>
+  
+  <div *ngIf="loading" class="spinner-grow text-success p-2" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
     <a class="btn btn-primary btn-lg" id="editbtn" routerLink="../ballot" role="button">Edit vote</a>
   </div>
 </div>

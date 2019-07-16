@@ -20,6 +20,9 @@ import { RemoveNamespacePipe } from './remove-namespace.pipe';
 import { NewElectionComponent } from './new-election/new-election.component';
 import { PolingStationComponent } from './poling-station/poling-station.component';
 import { DivisionComponent } from './division/division.component';
+import { NewPoliticianComponent } from './new-politician/new-politician.component';
+import { ViewPollingStationsComponent } from './view-polling-stations/view-polling-stations.component';
+import { ViewDivisionsComponent } from './view-divisions/view-divisions.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { DivisionComponent } from './division/division.component';
     RemoveNamespacePipe,
     NewElectionComponent,
     PolingStationComponent,
-    DivisionComponent
+    DivisionComponent,
+    NewPoliticianComponent,
+    ViewPollingStationsComponent,
+    ViewDivisionsComponent
   ],
   imports: [
     BrowserModule,

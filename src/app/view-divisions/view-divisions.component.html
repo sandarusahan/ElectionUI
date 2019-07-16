@@ -1,0 +1,26 @@
+
+
+<div class="container mt-3">
+    <button routerLink="new" class="btn btn-primary">+ New Division</button>
+    <br>
+    <br>
+      <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">District</th>
+          <th scope="col">Province</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let division of divisions; let i = index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{division.name}}</td>
+          <td>{{division.district}}</td>
+          <td>{{division.province}}</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    </div>

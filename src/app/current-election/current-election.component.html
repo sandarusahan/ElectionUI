@@ -1,11 +1,13 @@
-<div class="jumbotron jumbotron-fluid">
+
+  <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h1 class="display-4">Current Elections</h1>
       <p class="lead">Displays all the ongoing elections & elections yet to start.</p>
     </div>
   </div>
-<div class="container mt-5">
 
+<div class="container mt-5">
+  <span *ngIf="0==filteredElections.length" class="ml-5">No elections to show at the moment :(</span>
   <div class="mb-3" *ngFor="let election of filteredElections; let i = index">
     <div class="card text-center">
       <div class="card-header">

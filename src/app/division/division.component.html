@@ -1,13 +1,13 @@
-<form>
+<form class="container mt-5">
   <div class="form-group">
     <label for="divName">Name</label>
-    <input type="text" class="form-control" id="divName" aria-describedby="division-name" placeholder="Enter division name">
+    <input type="text" class="form-control" id="divName" aria-describedby="division-name" placeholder="Enter division name" [(ngModel)]="division.name" name="name">
     <!-- <small class="form-text text-muted">We'll never share your email with anyone else.</small> -->
   </div>
   
   <div class="form-group">
     <label for="exampleFormControlSelect1">District</label>
-    <select class="form-control" id="exampleFormControlSelect1">
+    <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="division.district" name="district">
       <option>Ampara</option>
       <option>Anuradhapura</option>
       <option>Badulla</option>
@@ -37,7 +37,7 @@
   </div>
   <div class="form-group">
     <label for="exampleFormControlSelect1">Province</label>
-    <select class="form-control" id="exampleFormControlSelect1">
+    <select class="form-control" id="exampleFormControlSelect1"[(ngModel)]="division.province" name="province">
       <option>Central Province</option>
       <option>Eastern Province</option>
       <option>Northern Province</option>
@@ -49,5 +49,10 @@
       <option>Sabaragamuwa Province</option>
     </select>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit </button>
+  <span  class=" p-2"><i *ngIf="success" class="fas fa-check-circle text-success"></i><i *ngIf="failed" class="fas fa-exclamation-circle text-danger"></i></span>
+  
+  <div *ngIf="loading" class="spinner-grow text-success p-2" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
 </form>

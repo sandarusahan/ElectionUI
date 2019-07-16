@@ -1,27 +1,32 @@
-<form>
+<form class="container mt-5">
   <div class="form-group">
     <label for="psName">Name</label>
-    <input type="text" class="form-control" id="psName" aria-describedby="polling-station-name" placeholder="Enter polling station">
+    <input type="text" class="form-control" id="psName" aria-describedby="polling-station-name" placeholder="Enter polling station" [(ngModel)]="pollingStation.name" name="name">
     <!-- <small class="form-text text-muted">We'll never share your email with anyone else.</small> -->
   </div>
   <div class="form-group">
     <label for="address">Address</label>
-    <input type="address" class="form-control" id="address" placeholder="Location of polling station">
+    <input type="address" class="form-control" id="address" placeholder="Location of polling station" [(ngModel)]="pollingStation.address" name="address">
   </div>
   <div class="form-group">
     <label for="regVoters">Registed Voters</label>
-    <input type="number" class="form-control" id="regVoters" placeholder="Number of registed voters of polling station">
+    <input type="number" class="form-control" id="regVoters" placeholder="Number of registed voters of polling station" [(ngModel)]="pollingStation.registeredVoters" name="registeredVotersx">
   </div>
   <div class="form-group">
     <label for="exampleFormControlSelect1">Division</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+    <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="pollingStation.electoralDivision" name="electoralDivision" (click)="onDiviClick()">
+      <option *ngFor="let division of divisions" [value]="[division.divisionId]">{{division.name}} - {{division.district}}</option>
+      
     </select>
   </div>
   
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit</button>
+  <span  class=" p-2"><i *ngIf="success" class="fas fa-check-circle text-success"></i><i *ngIf="failed" class="fas fa-exclamation-circle text-danger"></i></span>
+  
+  <div *ngIf="loading" class="spinner-grow text-success p-2" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
 </form>
+
+
+<pre>{{pollingStation | json}}</pre> 
