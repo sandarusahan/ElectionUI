@@ -8,6 +8,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataService {
 
+  declaredVotes:number;
+  rejectedVotes:number;
+  allVotes:number;
   vote:Vote = new Vote();
   private source = new BehaviorSubject("");
   data = this.source.asObservable();

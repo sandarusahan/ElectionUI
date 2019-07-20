@@ -14,6 +14,10 @@ export class PoliticianService {
     return this.http.get<Politician[]>(this.url);
   }
 
+  getPolitician(politicianId){
+    return this.http.get<Politician>(this.url+"/"+politicianId)
+  }
+
   newPolitician(politician:Politician){
     return this.http.post(this.url, politician);
   }

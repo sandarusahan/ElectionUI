@@ -1,0 +1,26 @@
+<div id="ballot-list" class="container">
+  <div class="jumbotron jumbotron-fluid">
+    <div id="baltittle" class="container">
+      <h1 class="display">{{election.name}}</h1>
+      <p class="lead">{{election.startTime|date:'medium'}} - {{election.endTime|date:'medium'}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="card m-3" style="width: 100%;" *ngFor="let result of results" [routerLink]="[result.candidate.politicianId]">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img [src]="result.candidate.image" style="width: 15vw;" class="card-img" alt="Candidate image not availble">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+                
+                <h3 class="card-title ">{{result.candidate.name}}</h3>
+                <p class="card-text">{{result.candidate.party}}</p>
+                <p><ngb-progressbar type="primary" [value]="((result.votes/declaredVotes)*100)" [height]="20"><span>{{(result.votes/declaredVotes)*100|number}}%</span></ngb-progressbar></p>
+                <p><span>{{result.votes}}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+    

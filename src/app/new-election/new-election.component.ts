@@ -41,6 +41,7 @@ export class NewElectionComponent implements OnInit {
   constructor(private politicianService:PoliticianService, private generator:IdGenerateService, private electionService:ElectionService, private divisionService:DivisionService, private removeNamespaceService:RemoveNamespaceService) { }
 
   ngOnInit() {
+    this.electionDate = new Date();
     this.allPoliticians = []
     // this.election = new Election();
     this.divisionService.getAllDivisions().subscribe(divsions => {

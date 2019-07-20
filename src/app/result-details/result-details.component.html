@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="card m-3" style="width: 100%;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img [src]="candidate.image" style="width: 15vw;" class="card-img" alt="Candidate image not availble">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+                
+                <h3 class="card-title ">{{candidate.name}}</h3>
+                <p class="card-text">{{candidate.party}}</p>
+                <p><ngb-progressbar type="primary" [value]="((result.votes/data.declaredVotes)*100)" [height]="20"><span>{{(result.votes/data.declaredVotes)*100|number}}%</span></ngb-progressbar></p>
+                <p><span>{{result.votes}}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+  <ngb-tabset>
+    <ngb-tab title="Province">
+      <ng-template ngbTabContent>
+        <p>Raw denim you probably haven't heard of </p>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="District">
+      <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
+        <p>Exercitation </p>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Division">
+      <ng-template ngbTabContent>
+        <p>Sed commodo, leo at suscipit at.</p>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

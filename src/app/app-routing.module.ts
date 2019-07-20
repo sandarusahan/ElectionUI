@@ -1,3 +1,6 @@
+import { ResultDetailsComponent } from './result-details/result-details.component';
+import { ElectionResultComponent } from './election-result/election-result.component';
+import { RequestResultComponent } from './request-result/request-result.component';
 import { ViewPollingStationsComponent } from './view-polling-stations/view-polling-stations.component';
 import { NewPoliticianComponent } from './new-politician/new-politician.component';
 import { DivisionComponent } from './division/division.component';
@@ -23,6 +26,9 @@ const routes: Routes = [
   {path: 'division', component: ViewDivisionsComponent},
   {path: 'division/new', component: DivisionComponent},
   {path: 'current-elections', component: CurrentElectionComponent},
+  {path: 'ended-elections', component: RequestResultComponent},
+  {path: 'ended-elections/:electionId', component: ElectionResultComponent},
+  {path: 'ended-elections/:electionId/:candidateId', component: ResultDetailsComponent},
   {path: 'transactions', component: ViewAllTransactionsComponent},
   {path: 'elections', component: ElectionsComponent},
   {path: 'new-election', component: NewElectionComponent},
