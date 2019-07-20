@@ -1,15 +1,40 @@
+<div class="d-flex justify-content-center">
+    <h1 class="statuses"><i *ngIf="success" class="fas fa-check-circle fa-3x text-success"></i><i *ngIf="failed" class="fas fa-exclamation-circle text-danger"></i></h1>
+  
+    <div *ngIf="loading" class="spinner-border text-success loadstatus" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
 <div class="container">
 <div class="jumbotron">
-    <h1 class="display-4">You have marked your votes for,</h1>
-    <p class="lead">{{party.name}}</p>
+    <h4>You have marked your votes for,</h4>
+    <h3>{{data.vote.votedCandidate.name}}</h3>
     <hr class="my-4">
-    <p *ngFor="let p of prefVotes">{{p.pName}}</p>
-    <a class="btn btn-success btn-lg" (click)="onCastBallot()" role="button">Confirm and Cast in to vote box</a>
-    <span  class=" p-2"><i *ngIf="success" class="fas fa-check-circle text-success"></i><i *ngIf="failed" class="fas fa-exclamation-circle text-danger"></i></span>
-  
-  <div *ngIf="loading" class="spinner-grow text-success p-2" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-    <a class="btn btn-primary btn-lg" id="editbtn" routerLink="../ballot" role="button">Edit vote</a>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Enter Vote Key</span>
+        </div>
+        <input type="text" #voteKey (input)="voteKeyOnPress(voteKey.value)" class="form-control" aria-label="Amount (to the nearest dollar)">
+        <div class="input-group-append">
+          <span class="input-group-text">
+            <div>
+              <span><i *ngIf="success_key" class="fas fa-check-circle text-success"></i><i *ngIf="failed_key" class="fas fa-exclamation-circle text-danger"></i></span>
+            
+              <div *ngIf="loading_key" class="spinner-border spinner-border-sm text-success" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+          </div>
+        </span>
+        </div>
+      </div>
+    <button class="btn btn-success btn-lg" (click)="onCastBallot()" role="button" [disabled]="disable || !success_key">Confirm and Cast in to vote box</button>
+        
+    <button class="btn btn-primary btn-lg" id="editbtn" role="button" [disabled]="disable" (click)="goBack()">Edit vote</button>
+    <hr class="my-4">
+    <div class="text-center">
+    <small *ngIf="success" class="text-center"><b>{{countdown}} sec</b></small>  
+
+    </div>
   </div>
 </div>

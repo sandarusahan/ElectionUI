@@ -21,17 +21,21 @@ export class DivisionComponent implements OnInit {
 
   onSubmit(){
     this.loading = true;
+    this.failed = false;
+    this.success = false;
    this.division.$class = "org.evotedapp.biznet.Division"
     this.division.divisionId = "div"+this.idService.generate()
     this.divisionService.addNewDivision(this.division).subscribe(div => 
       {
         this.success = true;
         this.loading = false;
+        this.failed = false;
         this.division.name = ""
         console.log(div)
       }, err => {
         this.failed = true
         this.loading = false;
+        this.success = false;
       })
   }
 

@@ -1,7 +1,7 @@
 import { RemoveNamespaceService } from './../remove-namespace.service';
 import { Division } from './../Model/Division';
 import { DivisionService } from './../Services/division.service';
-import { PolingStation } from './../Model/PolingStation';
+import { PollingStation } from './../Model/PolingStation';
 import { PollingStationService } from './../Services/polling-station.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewPollingStationsComponent implements OnInit {
 
-  pollingStations:PolingStation[] = []
+  pollingStations:PollingStation[] = []
   divisions:Division[]=[]
   constructor(private pollingStationService:PollingStationService, private divisionService:DivisionService, private removeNamespaceService:RemoveNamespaceService) { }
 

@@ -1,7 +1,7 @@
 import { IdGenerateService } from './../Services/id-generate.service';
 import { DivisionService } from './../Services/division.service';
 import { PollingStationService } from './../Services/polling-station.service';
-import { PolingStation } from './../Model/PolingStation';
+import { PollingStation } from './../Model/PolingStation';
 import { Component, OnInit } from '@angular/core';
 import { Division } from '../Model/Division';
 
@@ -14,7 +14,7 @@ export class PolingStationComponent implements OnInit {
   success:boolean = false
   failed:boolean = false
   loading:boolean = false
-  pollingStation:PolingStation = new PolingStation();
+  pollingStation:PollingStation = new PollingStation();
   divisions:Division[]=[];
   constructor(private pollingStationServcie:PollingStationService, private divisionService:DivisionService, private idGenerateService:IdGenerateService) { }
 

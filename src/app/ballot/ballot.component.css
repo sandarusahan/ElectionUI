@@ -1,22 +1,22 @@
 
-
+/* 
 .card-body {
     height: 6vh;
     background-color: rgb(223, 221, 221)
-}
-
+} */
+/* 
 .card-img-top {
     height: 12vh;
-}
+} */
  
-.card-title {
+/* .card-title {
     margin-top: -1vh;
     text-align: center;
-}
+} */
 
-img {
+/* img {
     background-size: cover
- }
+ } */
 
  .card:hover {
     transform: scale(1.025); 
@@ -27,7 +27,6 @@ img {
      visibility: visible;
      opacity: 1;
      text-align: center;
-     color: red;
  }
 
  .card:active {
@@ -50,13 +49,13 @@ img {
      color:rgb(0, 0, 0);
  }
 
- a {
+ /* a {
      width: 100%;
- }
+ } */
 
  .card-desc {
      visibility: hidden;
-     margin-top: -10vh;
+     /* margin-top: -10vh; */
  }
 
  .btn-danger {
@@ -78,4 +77,9 @@ img {
  .active-span {
      opacity: 0.5;
     transform: scale(0.77);
+ }
+
+ #ballot-list{
+     margin-left: 20%;
+     
  }

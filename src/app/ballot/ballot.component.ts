@@ -9,7 +9,7 @@ import { Vote } from './../Model/Vote';
 import { PrefVote } from './../Model/PrefVote';
 import { Party } from '../Model/Party';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-ballot',
@@ -19,7 +19,7 @@ import { ActivatedRoute } from '@angular/router';
 export class BallotComponent implements OnInit {
 
   isSelected = null;
-  activePartyId = null;
+  activeCandidateId = "";
   activeSpan;
   votes = 0;
   msg = "Click to mark your vote"
@@ -28,7 +28,9 @@ export class BallotComponent implements OnInit {
   candidates:Politician[] = []
   candidatesIds:string[] = []
 
-  constructor(private data : DataService, private ballot : BallotService, private route:ActivatedRoute, private electionService:ElectionService, private removeNSService:RemoveNamespaceService, private politicianService:PoliticianService) { }
+  candidate:Politician = new Politician();
+
+  constructor(private data : DataService, private ballot : BallotService, private route:ActivatedRoute, private electionService:ElectionService, private removeNSService:RemoveNamespaceService, private politicianService:PoliticianService, private router:Router) { }
 
 
   ngOnInit() { 
@@ -39,35 +41,37 @@ export class BallotComponent implements OnInit {
         this.election = election;
         this.candidatesIds = []
         this.election.candidates.forEach(candidate => this.candidatesIds.push(this.removeNSService.transform(candidate, "resource:org.evotedapp.biznet.Politician#")))
+
+        this.politicianService.getAllPoliticians().subscribe(politicians => {
+          this.candidates = []
+          this.candidatesIds.forEach(poliId => {
+            this.candidates.push(politicians.find(x => x.politicianId == poliId))
+          })
+        })
         
       })
     })
 
-    this.politicianService.getAllPoliticians().subscribe(politicians => {
-      this.candidates = []
-      this.candidatesIds.forEach(poliId => {
-        this.candidates.push(politicians.find(x => x.politicianId == poliId))
-      })
-    })
+    
   }
   
-  // cardOnClick(candidate) {
+  cardOnClick(candidate:Politician) {
     
-  //   this.party = party;
-  //   this.activePartyId = party.id;
-  //   this.msg = party.name + " is marked as voted";
-  // }
+    this.candidate = candidate;
+    this.activeCandidateId = candidate.politicianId;
+    this.msg = candidate.name + " is marked as voted";
+  }
 
  
 
-  submitVote()  {
+  submitVote(candidate:Politician)  {
     let vote = new Vote();
-
-    // vote.partyid = this.activePartyId;
-    // vote.party = this.party;
-    // vote.prefVotes = this.selectedVotes;
+    vote.votedCandidate = candidate;
+    vote.election = this.election;
     
-    this.data.sendData(vote);
+    this.data.setBallot(vote);
+
+    this.router.navigate(['voting', 'summary'])
   }
 }
  

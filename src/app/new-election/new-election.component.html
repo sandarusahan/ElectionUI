@@ -2,12 +2,20 @@
   <div class="progress-bar bg-info" role="progressbar" [style.width.%]="(this.wizPage+1)*33.333333" aria-valuenow="33"
     aria-valuemin="0" aria-valuemax="100"></div>
 </div>
-<form class="container">
-  <br>
-  <br>
+<form class="container mt-3">
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-secondary" (click)="prevBtn()" [disabled]="wizPage == 0">Previous</button>
+    </div>
+    <div class="col">
+        <h3>Step {{wizPage+1}} of 3</h3>
+    </div>
+    <div class="col">
+      <button id="nxt-btn" class="btn btn-secondary" (click)="nextBtn()" [disabled]="wizPage == 2">Next</button>
+    </div>
+  </div>
   <br>
   <div class="container" *ngIf="wizPage==0">
-    <h3>Step 1 of 3</h3>
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" aria-describedby="emailHelp"
@@ -57,7 +65,7 @@
   </button> -->
 
     <!-- Modal -->
-    <!-- <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -67,27 +75,24 @@
           </button>
         </div>
         <div class="modal-body">
-          
+          <app-new-politician></app-new-politician>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addToArr()">Save changes</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="ngOnInit()">Save changes</button>
         </div>
       </div>
     </div>
-  </div> -->
-    <h3>Step 2 of 3</h3>
-
-    <h3>Choose Candidates</h3>
+  </div>
     <div class="row">
-      <div class="col-7">
-        <table *ngIf="politicians" class="table table-sm">
+      <div class="col-4">
+        <h3>Choose Candidates</h3>
+        <table *ngIf="politicians" class="table table-hover">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">Party</th>
-              <th scope="col">Division</th>
             </tr>
           </thead>
           <tbody>
@@ -95,20 +100,33 @@
               <th scope="row">{{i+1}}</th>
               <td>{{politcian.name}}</td>
               <td>{{politcian.party}}</td>
-              <td>{{politcian.electoralDivisionew}}</td>
             </tr>
-
           </tbody>
         </table>
       </div>
       <div class="col">
-        <table class="table table-hover">
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">+ New Politician</button>
+          </div>
+          <div class="col-9">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+              </div>
+              <input type="text" class="form-control" placeholder="Find Candidates" [(ngModel)]="keyword" name="keyword" (input)="findCandidates()" aria-label="search" aria-describedby="basic-addon1">
+            </div>
+          </div>
+        </div>
+        
+        <table class="table table-hover table-sm">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Name</th>
-              <!-- <th scope="col">Party</th> -->
+              <th scope="col">Party</th>
               <th scope="col">Role</th>
+              <th scope="col">Division</th>
             </tr>
           </thead>
           <tbody>
@@ -116,58 +134,34 @@
               [class.active]="isExist(politician.politicianId)" (click)="onSelect(i)">
               <th scope="row">{{i+1}}</th>
               <td>{{politician.name}}</td>
-              <!-- <td>{{politician.party}}</td> -->
+              <td>{{politician.party}}</td>
               <td>{{politician.role}}</td>
+              <td>{{politician.electoralDivision}}</td>
             </tr>
-
           </tbody>
         </table>
       </div>
     </div>
-
-
-
   </div>
   <div *ngIf="wizPage == 2" class="container">
-    <h3>Step 3 of 3</h3>
-
-    <table class="table table-sm">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-
-      </tbody>
-    </table>
-
-  </div>
-  <div class="row">
-    <div class="col">
-      <button class="btn btn-secondary" (click)="prevBtn()" [disabled]="wizPage == 0">Previous</button>
-    </div>
-    <div class="col">
-      <button id="sub-btn" type="submit" (click)="onSubmit()" class="btn btn-primary"
-        [disabled]="wizPage != 2">Submit</button>
-      <span class=" p-2"><i *ngIf="success" class="fas fa-check-circle text-success"></i><i *ngIf="failed"
-          class="fas fa-exclamation-circle text-danger"></i></span>
-
-      <div *ngIf="loading" class="spinner-grow text-success p-2" role="status">
-        <span class="sr-only">Loading...</span>
+    <div class="container">
+        <div class="card bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">{{electionDate}}</div>
+            <div class="card-body">
+              <h5 class="card-title">{{name}}</h5>
+              <p class="card-text">{{timeRange}}</p>
+            </div>
+          </div>
+        <button id="sub-btn" type="submit" (click)="onSubmit()" class="btn btn-primary"
+          [disabled]="wizPage != 2">Submit</button>
+          <span class=" p-2"><i *ngIf="success" class="fas fa-check-circle text-success"></i><i *ngIf="failed"
+              class="fas fa-exclamation-circle text-danger"></i></span>
+    
+          <div *ngIf="loading" class="spinner-grow text-success p-2" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
       </div>
-    </div>
-    <div class="col">
-      <button id="nxt-btn" class="btn btn-secondary" (click)="nextBtn()" [disabled]="wizPage == 2">Next</button>
-    </div>
   </div>
 </form>
+
+<pre>{{election | json}}</pre>

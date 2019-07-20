@@ -11,20 +11,14 @@ export class BallotService {
   constructor(private http : HttpClient) { }
 
   url = "http://localhost:3000/api/"
+  voteTxnUrl = "http://localhost:3000/api/VoteTransaction"
 
   getBallot() {
     return this.http.get<Ballot[]>(this.url+"Ballot")
   }
 
   castBallot(ballot : Ballot) {
-    return this.http.post<Ballot>(this.url+"Ballot", ballot).subscribe(
-      ballot => {
-        console.log(ballot.ballotId + " Casted successfully ")
-      }, 
-      err => {
-        console.log(err)
-      }
-    )
+    return this.http.post<Ballot>(this.voteTxnUrl, ballot)
   }
 
   getParties() {

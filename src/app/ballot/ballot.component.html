@@ -5,14 +5,40 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="card mb-3" *ngFor="let c of candidates" [class.active]="c.politicianId === activePartyId" (click)="cardOnClick(p)">
-    <img class="card-img-top" [src]="c.image" alt="Candidate image not availble">
-    <div class="card-body">
-      <h5 class="card-title">{{c.name}}</h5>
-      <h4 class="card-desc" style="flood-opacity: 1;"><b>{{msg}}</b></h4>
-    </div>
+<div id="ballot-list" class="container">
+
+  <div class="row">
+    <div class="card m-3" style="width: 50vw;" *ngFor="let c of candidates" (click)="cardOnClick(c)">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img [src]="c.image" style="width: 15vw;" class="card-img" alt="Candidate image not availble">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h3 class="card-title ">{{c.name}}</h3>
+              <p class="card-text">{{c.party}}</p>
+              <button class="btn btn-primary card-desc" (click)="submitVote(c)">Vote {{c.name}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
+    
+
+
+
+
+  <!-- <div class="row">
+      <div class="card m-3" style="width : 300px;" *ngFor="let c of candidates" [class.active]="c.politicianId === activePartyId" (click)="cardOnClick(p)">
+          <img class="card-img-top" style="height: 300px" [src]="c.image" alt="Candidate image not availble">
+          <div class="card-body">
+            <h4 class="card-title">{{c.name}}</h4>
+            <h6 class="card-title">{{c.party}}</h6>
+            <h4 class="card-desc" style="flood-opacity: 1;"><b>{{msg}}</b></h4>
+          </div>
+        </div>
+  </div> -->
+  
 
 </div>
 <!-- 
@@ -24,4 +50,6 @@
     <br>
     <button class="btn btn-primary btn-lg" *ngIf="selectedVotes.length == 3" (click)="submitVote()" routerLink="../summary">Cast Your Ballot</button>
   </div> -->
+
+  
   

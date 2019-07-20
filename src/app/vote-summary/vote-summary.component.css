@@ -1,7 +1,20 @@
-.container {
-    margin-top: 23vh;
-}
+/* .container {
+    margin-top: 5vh;
+} */
 
 #editbtn {
     margin-left : 20px;
+}
+
+.statuses{
+    /* margin-left: 45%; */
+    margin-top: 4vh;
+}
+
+.loadstatus{
+    height:155px;
+    width:155px;
+    margin-bottom: 15vh;
+    /* margin-left: 45%; */
+
 }

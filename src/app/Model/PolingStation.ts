@@ -1,5 +1,5 @@
 import { Division } from './Division';
-export class PolingStation {
+export class PollingStation {
     $class:string
     pollingStationId:string
     name:string
