@@ -23,7 +23,7 @@ export class DivisionComponent implements OnInit {
     this.loading = true;
     this.failed = false;
     this.success = false;
-   this.division.$class = "org.evotedapp.biznet.Division"
+    this.division.$class = "org.evotedapp.biznet.Division"
     this.division.divisionId = "div"+this.idService.generate()
     this.divisionService.addNewDivision(this.division).subscribe(div => 
       {

@@ -15,7 +15,7 @@
       </div>
       <div class="card-body">
         <h5 class="card-title">{{election.name}}</h5>
-        <p class="card-text">This election was created at 20/06/2019 by commisioner Mr. Mahinda Deshapriya</p>
+        <p class="card-text">This election was created at {{election.electionDate|date:'medium'}} by commisioner Mr. Mahinda Deshapriya</p>
         <a [routerLink]="[ '/voting/ballot', election.electionId ]" class="btn btn-primary">Start Voting</a>
       </div>
       <div class="card-footer text-muted">

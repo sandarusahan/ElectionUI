@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { PoliticianService } from './../Services/politician.service';
 import { RemoveNamespaceService } from './../remove-namespace.service';
 import { Politician } from './../Model/Politician';
@@ -22,23 +23,32 @@ export class BallotComponent implements OnInit {
   activeCandidateId = "";
   activeSpan;
   votes = 0;
-  msg = "Click to mark your vote"
+  msg = ""
 
-  election:Election;
+  ready = false;
+  timeLeft:string;
+
+  flag = true;
+  intervalId;
+  election:Election = new Election();
   candidates:Politician[] = []
   candidatesIds:string[] = []
 
   candidate:Politician = new Politician();
 
+  electionTxn:{$class: string,currentElectionId: string} = <{$class: string,currentElectionId: string}>new Object();
   constructor(private data : DataService, private ballot : BallotService, private route:ActivatedRoute, private electionService:ElectionService, private removeNSService:RemoveNamespaceService, private politicianService:PoliticianService, private router:Router) { }
 
 
   ngOnInit() { 
-   
+  
     this.route.paramMap.subscribe(param => {
       let id = param.get('electionId');
       this.electionService.getElection(id).subscribe(election => {
         this.election = election;
+        this.intervalId=setInterval(() => {
+          this.handleElection(election);
+        }, 1000)
         this.candidatesIds = []
         this.election.candidates.forEach(candidate => this.candidatesIds.push(this.removeNSService.transform(candidate, "resource:org.evotedapp.biznet.Politician#")))
 
@@ -53,10 +63,10 @@ export class BallotComponent implements OnInit {
     })
 
     
+    
   }
   
-  cardOnClick(candidate:Politician) {
-    
+  cardOnClick(candidate:Politician) {    
     this.candidate = candidate;
     this.activeCandidateId = candidate.politicianId;
     this.msg = candidate.name + " is marked as voted";
@@ -66,12 +76,63 @@ export class BallotComponent implements OnInit {
 
   submitVote(candidate:Politician)  {
     let vote = new Vote();
-    vote.votedCandidate = candidate;
+    if(candidate != null){
+      vote.votedCandidate = candidate;
+    }else{
+      let candi = new Politician();
+      candi.$class = "org.evotedapp.biznet.Politician";
+      candi.politicianId = "000"
+      candi.name = "No Body"
+      candi.party = "This vote will be mark as rejected"
+
+      vote.votedCandidate = candi;
+    }
     vote.election = this.election;
-    
     this.data.setBallot(vote);
 
     this.router.navigate(['voting', 'summary'])
+  }
+
+  handleElection(election){
+    var sTime = new Date().getTime() - new Date(election.startTime).getTime();
+    var eTime = new Date().getTime() - new Date(election.endTime).getTime();
+    let t = (sTime/1000)
+    if(sTime>0){
+      this.ready = true;
+      
+      if(this.flag){
+        this.startVotingTxn(election);
+        this.flag = false;
+      }
+      if(eTime>0){
+        this.ready = false;
+        this.msg = "Election is over"
+        this.endVotingTxn(election);
+      }
+    }else{
+      this.ready = false;
+      this.msg = "Election hasn't started yet"
+      if(t > -60){
+        this.msg + "(" +(t) + ")";
+      }
+      // this.timeLeft = t.getHours()+" : "+t.getMinutes()+" : "+t.getSeconds()
+    }
+  }
+
+  startVotingTxn(election:Election){
+    this.electionTxn.$class = "org.evotedapp.biznet.StartVotingTransaction";
+    this.electionTxn.currentElectionId = election.electionId;
+    this.electionService.startVoting(this.electionTxn).subscribe(res => console.log(console.log(res)))
+  }
+
+  endVotingTxn(election:Election){
+    this.electionTxn.$class = "org.evotedapp.biznet.EndVotingTransaction";
+    this.electionTxn.currentElectionId = election.electionId;
+    this.electionService.endVoting(this.electionTxn).subscribe(res => {
+      clearInterval(this.intervalId)
+      this.router.navigate(['ended-elections'])
+      console.log(res)
+    })
   }
 }
  

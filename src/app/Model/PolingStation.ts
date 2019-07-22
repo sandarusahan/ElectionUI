@@ -6,4 +6,5 @@ export class PollingStation {
     address:string
     registeredVoters:number
     electoralDivision:string
+    voteKeys:string[]
 }

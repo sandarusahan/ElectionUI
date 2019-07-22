@@ -1,34 +1,88 @@
 <div class="container">
-    <div class="card m-3" style="width: 100%;">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <img [src]="candidate.image" style="width: 15vw;" class="card-img" alt="Candidate image not availble">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-                
-                <h3 class="card-title ">{{candidate.name}}</h3>
-                <p class="card-text">{{candidate.party}}</p>
-                <p><ngb-progressbar type="primary" [value]="((result.votes/data.declaredVotes)*100)" [height]="20"><span>{{(result.votes/data.declaredVotes)*100|number}}%</span></ngb-progressbar></p>
-                <p><span>{{result.votes}}</span></p>
-            </div>
-          </div>
+  <div class="card m-3" style="width: 100%;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img [src]="candidate.image" style="width: 15vw;" class="card-img" alt="Candidate image not availble">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+            
+            <h3 class="card-title ">{{candidate.name}}</h3>
+            <p class="card-text">{{candidate.party}}</p>
+            <p><ngb-progressbar type="primary" [value]="((result.votes/data.declaredVotes)*100)" [height]="20"><span>{{(result.votes/data.declaredVotes)*100|number}}%</span></ngb-progressbar></p>
+            <p><span>Accumulated Votes : {{result.votes}}</span></p>
         </div>
       </div>
+    </div>
+  </div>
   <ngb-tabset>
     <ngb-tab title="Province">
       <ng-template ngbTabContent>
-        <p>Raw denim you probably haven't heard of </p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Province</th>
+              <th scope="col">Votes</th>
+              <th scope="col">Percentage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prov of provinceVotes; let i = index">
+              <th scope="row">{{i+1}}</th>
+              <td>{{prov.province}}</td>
+              <td>{{prov.votes}}</td>
+              <td>{{(prov.votes/result.votes)*100 | number}}%</td>
+            </tr>
+            
+          </tbody>
+        </table>
       </ng-template>
     </ngb-tab>
     <ngb-tab title="District">
-      <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
-        <p>Exercitation </p>
+      <ng-template ngbTabContent>
+          <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">District</th>
+                  <th scope="col">Votes</th>
+                  <th scope="col">Percentage</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dist of districtVotes; let i = index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{dist.district}}</td>
+                  <td>{{dist.votes}}</td>
+                  <td>{{(dist.votes/result.votes)*100 | number}}%</td>
+                </tr>
+                
+              </tbody>
+            </table>
       </ng-template>
     </ngb-tab>
     <ngb-tab title="Division">
       <ng-template ngbTabContent>
-        <p>Sed commodo, leo at suscipit at.</p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Division Name</th>
+              <th scope="col">Votes</th>
+              <th scope="col">Percentage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let div of divisions; let i = index">
+              <th scope="row">{{i+1}}</th>
+              <td>{{div.name}}</td>
+              <td>{{div.votes}}</td>
+              <td>{{(div.votes/result.votes)*100 | number}}%</td>
+            </tr>
+            
+          </tbody>
+        </table>
       </ng-template>
     </ngb-tab>
   </ngb-tabset>

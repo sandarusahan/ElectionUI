@@ -6,7 +6,7 @@ import { PoliticianService } from './../Services/politician.service';
 import { Election } from './../Model/Election';
 import { ElectionService } from './../Services/election.service';
 import { ActivatedRoute } from '@angular/router';
-import { ElectionResultService } from './../election-result.service';
+import { ElectionResultService } from '../Services/election-result.service';
 import { Component, OnInit } from '@angular/core';
 import { Politician } from '../Model/Politician';
 
@@ -21,6 +21,12 @@ export class ElectionResultComponent implements OnInit {
   // activeSpan;
   // votes = 0;
   // msg = "Click to mark your vote"
+
+  allVotes:number = 1000;
+  declaredVotes:number = 0;
+  rejectedVotes:number = 0;
+  validVotes:number = 0;
+
 
   allBallots:Ballot[] = []
   election:Election = new Election();
@@ -54,7 +60,7 @@ export class ElectionResultComponent implements OnInit {
               result.resultId = "res_"+candidate.politicianId;            
               result.votes = bals.length;
               result.candidate = candidate;
-
+              this.validVotes = this.validVotes + bals.length;
               this.results.push(result);
             })
           })
@@ -65,10 +71,7 @@ export class ElectionResultComponent implements OnInit {
     })
   }
 
-  allVotes:number = 1000;
-  declaredVotes:number = 0;
-  rejectedVotes:number = 0;
-
+ 
   getAllVotesByElection(electionRef){
     console.log(electionRef)
     this.resultService.getResultsByElection(electionRef).subscribe(ballots => {
@@ -83,7 +86,13 @@ export class ElectionResultComponent implements OnInit {
       this.dataService.rejectedVotes = this.rejectedVotes
       this.dataService.declaredVotes = this.declaredVotes
       this.dataService.allVotes = this.allVotes
+
     })
   }
 
+  get sortedCandidates() {
+    return this.results.sort((a, b) => {
+      return <any>new Date(b.votes) - <any>new Date(a.votes);
+    });
+  }
 }

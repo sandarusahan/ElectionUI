@@ -8,14 +8,15 @@
 
 <div class="container">
 <div class="jumbotron">
-    <h4>You have marked your votes for,</h4>
+    <h4>You have marked your vote for,</h4>
     <h3>{{data.vote.votedCandidate.name}}</h3>
+    <p>{{data.vote.votedCandidate.party}}</p>
     <hr class="my-4">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text">Enter Vote Key</span>
         </div>
-        <input type="text" #voteKey (input)="voteKeyOnPress(voteKey.value)" class="form-control" aria-label="Amount (to the nearest dollar)">
+        <input type="text" #voteKey (input)="voteKeyOnPress(voteKey.value)" class="form-control" [readonly]="disable" aria-label="Amount (to the nearest dollar)">
         <div class="input-group-append">
           <span class="input-group-text">
             <div>

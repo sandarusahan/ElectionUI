@@ -1,13 +1,15 @@
+import { Router } from '@angular/router';
 import { RemoveNamespaceService } from './../remove-namespace.service';
 import { PollingStation } from './../Model/PolingStation';
 import { ElectionService } from './../Services/election.service';
-import { Time } from '@angular/common';
+import * as moment from 'moment';
 import { Election } from '../Model/Election';
 import { PoliticianService } from '../Services/politician.service';
 import { Politician } from '../Model/Politician';
 import { Component, OnInit } from '@angular/core';
 import { IdGenerateService } from '../Services/id-generate.service';
 import { DivisionService } from '../Services/division.service';
+
 
 @Component({
   selector: 'app-new-election',
@@ -26,7 +28,7 @@ export class NewElectionComponent implements OnInit {
   pollingStations:PollingStation[]=[]
   meridian = true;
   electionDate:Date;
-  name:string;
+  name:string = '';
   wizPage:number = 0;
   candidates:string[] = [];
 
@@ -38,7 +40,7 @@ export class NewElectionComponent implements OnInit {
   loading:boolean = false
   election:Election;
 
-  constructor(private politicianService:PoliticianService, private generator:IdGenerateService, private electionService:ElectionService, private divisionService:DivisionService, private removeNamespaceService:RemoveNamespaceService) { }
+  constructor(private politicianService:PoliticianService, private generator:IdGenerateService, private electionService:ElectionService, private divisionService:DivisionService, private removeNamespaceService:RemoveNamespaceService, private router:Router) { }
 
   ngOnInit() {
     this.electionDate = new Date();
@@ -104,6 +106,8 @@ export class NewElectionComponent implements OnInit {
 
   onSubmit(){
     this.loading = true
+    this.success = false
+    this.failed = false
     let election = new Election();
     election.$class="org.evotedapp.biznet.NewElectionTransaction"
     election.electionId = "el"+this.generator.generate();
@@ -123,10 +127,14 @@ export class NewElectionComponent implements OnInit {
       console.log(elec)
       this.success = true;
       this.loading = false;
+      this.failed = false;
+      setTimeout(()=>{
+      this.router.navigate(['current-elections'])
+      }, 1500)
     }, err => {
       this.failed = true
       this.loading = false;
-
+      this.success = false;
       console.log(err)
     })
   }

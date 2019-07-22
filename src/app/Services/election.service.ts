@@ -22,4 +22,12 @@ export class ElectionService {
   newElection(election:Election){
     return this.http.post<Election>(this.urlTxn, election)
   }
+
+  startVoting(electionTxn){
+    return this.http.post("http://localhost:3000/api/StartVotingTransaction", electionTxn);
+  }
+
+  endVoting(electionETxn){
+    return this.http.post("http://localhost:3000/api/EndVotingTransaction", electionETxn);
+  }
 }

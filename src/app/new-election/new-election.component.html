@@ -8,10 +8,11 @@
       <button class="btn btn-secondary" (click)="prevBtn()" [disabled]="wizPage == 0">Previous</button>
     </div>
     <div class="col">
-        <h3>Step {{wizPage+1}} of 3</h3>
+      <h3>Step {{wizPage+1}} of 3</h3>
     </div>
     <div class="col">
-      <button id="nxt-btn" class="btn btn-secondary" (click)="nextBtn()" [disabled]="wizPage == 2">Next</button>
+      <button id="nxt-btn" class="btn btn-secondary" (click)="nextBtn()"
+        [disabled]="wizPage == 2||name == ''">Next</button>
     </div>
   </div>
   <br>
@@ -65,25 +66,27 @@
   </button> -->
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalScrollableTitle">Candidates</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <app-new-politician></app-new-politician>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="ngOnInit()">Save changes</button>
+    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalScrollableTitle">Candidates</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <app-new-politician></app-new-politician>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="ngOnInit()">Save
+              changes</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
     <div class="row">
       <div class="col-4">
         <h3>Choose Candidates</h3>
@@ -107,18 +110,20 @@
       <div class="col">
         <div class="row">
           <div class="col">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">+ New Politician</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">+ New
+              Politician</button>
           </div>
           <div class="col-9">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
               </div>
-              <input type="text" class="form-control" placeholder="Find Candidates" [(ngModel)]="keyword" name="keyword" (input)="findCandidates()" aria-label="search" aria-describedby="basic-addon1">
+              <input type="text" class="form-control" placeholder="Find Candidates" [(ngModel)]="keyword" name="keyword"
+                (input)="findCandidates()" aria-label="search" aria-describedby="basic-addon1">
             </div>
           </div>
         </div>
-        
+
         <table class="table table-hover table-sm">
           <thead>
             <tr>
@@ -145,23 +150,48 @@
   </div>
   <div *ngIf="wizPage == 2" class="container">
     <div class="container">
-        <div class="card bg-light mb-3" style="max-width: 18rem;">
-            <div class="card-header">{{electionDate}}</div>
-            <div class="card-body">
-              <h5 class="card-title">{{name}}</h5>
-              <p class="card-text">{{timeRange}}</p>
-            </div>
-          </div>
-        <button id="sub-btn" type="submit" (click)="onSubmit()" class="btn btn-primary"
-          [disabled]="wizPage != 2">Submit</button>
-          <span class=" p-2"><i *ngIf="success" class="fas fa-check-circle text-success"></i><i *ngIf="failed"
-              class="fas fa-exclamation-circle text-danger"></i></span>
-    
-          <div *ngIf="loading" class="spinner-grow text-success p-2" role="status">
+      <div class="card bg-light mb-3" style="width: 100%;">
+        <div class="card-header text-center">{{start|date:'medium'}} - {{end|date:'medium'}}</div>
+        <div class="card-body">
+          <h5 class="card-title text-center">{{name}}</h5>
+
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Party</th>
+                <th scope="col">Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pol of selectedPoliticians; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{pol.name}}</td>
+                <td>{{pol.party}}</td>
+                <td>{{pol.role}}</td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-11">
+          <button type="submit" (click)="onSubmit()" class="btn btn-primary btn-lg btn-block"
+            [disabled]="wizPage != 2">Submit</button>
+
+        </div>
+        <div class="col">
+          <span class="p-2"><i *ngIf="success" class="fas fa-lg fa-check-circle text-success"></i><i *ngIf="failed"
+              class="fas fa-lg fa-exclamation-circle text-danger"></i></span>
+
+          <div *ngIf="loading" class="spinner-grow text-success text center p-2" role="status">
             <span class="sr-only">Loading...</span>
           </div>
+        </div>
       </div>
+    </div>
   </div>
 </form>
-
-<pre>{{election | json}}</pre>
