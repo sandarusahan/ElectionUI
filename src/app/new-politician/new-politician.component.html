@@ -1,9 +1,22 @@
+<div class="jumbotron jumbotron-fluid">
+  <div id="baltittle" class="container">
+    <h1 class="display">Add New Politician</h1>
+    <p class="lead">Enter required details for register a politician</p>
+  </div>
+</div>
+
 <form class="container mt-5">
   <div class="form-group">
     <label for="pName">Name</label>
     <input type="text" class="form-control" id="pName" aria-describedby="polling-station-name"
       placeholder="Enter politician's name" [(ngModel)]="politician.name" name="name">
     <!-- <small class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+  </div>
+  <div class="form-group">
+    <label for="partyName">NIC</label>
+    <input type="text" class="form-control" id="nic" aria-describedby="polling-station-name"
+      placeholder="Enter NIC of politician" [(ngModel)]="politician.nic" name="nic" (blur)="checkNic()">
+    <small class="form-text text-danger">{{msg}}</small>
   </div>
   <div class="form-group">
     <label for="partyName">Party Name</label>
@@ -45,12 +58,10 @@
     </select>
   </div>
 
-  <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit</button>
+  <button type="submit" (click)="onSubmit()" class="btn btn-primary" [disabled]="!valid">Submit</button>
   <span  class=" p-2"><i *ngIf="success" class="fas fa-check-circle text-success"></i><i *ngIf="failed" class="fas fa-exclamation-circle text-danger"></i></span>
   
   <div *ngIf="loading" class="spinner-grow text-success p-2" role="status">
     <span class="sr-only">Loading...</span>
   </div>
 </form>
-
-<pre>{{politician | json}}</pre> 

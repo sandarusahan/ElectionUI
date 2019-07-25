@@ -1,3 +1,5 @@
+import { LoginPollingStationComponent } from './login-polling-station/login-polling-station.component';
+import { ViewPollingStationComponent } from './view-polling-station/view-polling-station.component';
 import { ResultDetailsComponent } from './result-details/result-details.component';
 import { ElectionResultComponent } from './election-result/election-result.component';
 import { RequestResultComponent } from './request-result/request-result.component';
@@ -16,12 +18,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VoteSummaryComponent } from './vote-summary/vote-summary.component';
 import { ViewDivisionsComponent } from './view-divisions/view-divisions.component';
+import { LoginComissionerComponent } from './login-comissioner/login-comissioner.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent },
+  {path: 'login', component: LoginPollingStationComponent },
+  {path: 'login-admin', component: LoginComissionerComponent },
   {path: 'politicians', component: PoliticiansComponent},
   {path: 'politicians/new', component: NewPoliticianComponent},
   {path: 'polling-station', component: ViewPollingStationsComponent},
+  {path: 'polling-station/view/:pollId', component: ViewPollingStationComponent},
   {path: 'polling-station/new', component: PolingStationComponent},
   {path: 'division', component: ViewDivisionsComponent},
   {path: 'division/new', component: DivisionComponent},

@@ -14,9 +14,17 @@ export class DivisionComponent implements OnInit {
   failed:boolean = false
   loading:boolean = false
   division:Division = new Division()
+  divNames:string[] = [];
+  msg: string = "";
   constructor(private divisionService:DivisionService, private idService:IdGenerateService) { }
 
   ngOnInit() {
+    this.divisionService.getAllDivisions().subscribe(divs => {
+      this.divNames = [];
+      divs.forEach(div => {
+        this.divNames.push(div.name);
+      })
+    })
   }
 
   onSubmit(){
@@ -39,4 +47,17 @@ export class DivisionComponent implements OnInit {
       })
   }
 
+  checkName(){
+    let name = this.division.name;
+
+    if(name != undefined){
+      if(this.divNames.includes(name)){
+        this.msg = "Warning : Division name already exist !!"
+      }else{
+        this.msg = ""
+      }
+    }else{
+      this.msg = "Division name is required!!"
+    }
+  }
 }

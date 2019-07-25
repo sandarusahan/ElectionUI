@@ -40,11 +40,19 @@ export class NewElectionComponent implements OnInit {
   loading:boolean = false
   election:Election;
 
+  elecNames:string[] =[];
+  msg: string = "";
   constructor(private politicianService:PoliticianService, private generator:IdGenerateService, private electionService:ElectionService, private divisionService:DivisionService, private removeNamespaceService:RemoveNamespaceService, private router:Router) { }
 
   ngOnInit() {
     this.electionDate = new Date();
     this.allPoliticians = []
+    this.electionService.viewAllElections().subscribe(elecs => {
+      this.elecNames = []
+      elecs.forEach(ele => {
+        this.elecNames.push(ele.name);
+      })
+    })
     // this.election = new Election();
     this.divisionService.getAllDivisions().subscribe(divsions => {
       
@@ -129,7 +137,7 @@ export class NewElectionComponent implements OnInit {
       this.loading = false;
       this.failed = false;
       setTimeout(()=>{
-      this.router.navigate(['current-elections'])
+      this.router.navigate(['elections'])
       }, 1500)
     }, err => {
       this.failed = true
@@ -164,5 +172,19 @@ export class NewElectionComponent implements OnInit {
     }
     console.log(this.wizPage)
 
+  }
+
+  checkName(){
+    let name = this.name;
+
+    if(name != ""){
+      if(this.elecNames.includes(name)){
+        this.msg = "Warning : Division name already exist !!"
+      }else{
+        this.msg = ""
+      }
+    }else{
+      this.msg = "Division name is required!!"
+    }
   }
 }

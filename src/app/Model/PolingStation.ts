@@ -1,4 +1,3 @@
-import { Division } from './Division';
 export class PollingStation {
     $class:string
     pollingStationId:string
@@ -7,4 +6,5 @@ export class PollingStation {
     registeredVoters:number
     electoralDivision:string
     voteKeys:string[]
+    password:string
 }

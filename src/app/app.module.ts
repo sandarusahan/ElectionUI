@@ -26,6 +26,9 @@ import { ViewDivisionsComponent } from './view-divisions/view-divisions.componen
 import { RequestResultComponent } from './request-result/request-result.component';
 import { ElectionResultComponent } from './election-result/election-result.component';
 import { ResultDetailsComponent } from './result-details/result-details.component';
+import { ViewPollingStationComponent } from './view-polling-station/view-polling-station.component';
+import { LoginPollingStationComponent } from './login-polling-station/login-polling-station.component';
+import { LoginComissionerComponent } from './login-comissioner/login-comissioner.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { ResultDetailsComponent } from './result-details/result-details.componen
     ViewDivisionsComponent,
     RequestResultComponent,
     ElectionResultComponent,
-    ResultDetailsComponent
+    ResultDetailsComponent,
+    ViewPollingStationComponent,
+    LoginPollingStationComponent,
+    LoginComissionerComponent
   ],
   imports: [
     BrowserModule,

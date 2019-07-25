@@ -1,6 +1,6 @@
 
 <header>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <nav *ngIf="!polService.login" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" routerLink="">SL Election</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -11,9 +11,9 @@
           <a class="nav-link" routerLink="">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="current-elections">Election</a>
+          <a class="nav-link" *ngIf="!polService.admin" routerLink="current-elections">Election</a>
         </li>
-        <li ngbDropdown class="nav-item dropdown">
+        <li *ngIf="polService.admin" ngbDropdown class="nav-item dropdown">
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Admin
           </a>
@@ -32,6 +32,7 @@
       <form class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-danger my-2 ml-2 my-sm-0" *ngIf="polService.authenticated" (click)="logout()" type="submit">Logout</button>
       </form>
     </div>
   </nav>

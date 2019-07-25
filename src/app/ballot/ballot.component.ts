@@ -41,6 +41,7 @@ export class BallotComponent implements OnInit {
 
 
   ngOnInit() { 
+
   
     this.route.paramMap.subscribe(param => {
       let id = param.get('electionId');
@@ -130,7 +131,6 @@ export class BallotComponent implements OnInit {
     this.electionTxn.currentElectionId = election.electionId;
     this.electionService.endVoting(this.electionTxn).subscribe(res => {
       clearInterval(this.intervalId)
-      this.router.navigate(['ended-elections'])
       console.log(res)
     })
   }

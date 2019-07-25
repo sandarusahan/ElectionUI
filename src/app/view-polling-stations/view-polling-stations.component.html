@@ -1,3 +1,9 @@
+<div class="jumbotron jumbotron-fluid">
+  <div id="baltittle" class="container">
+    <h1 class="display">Polling Stations</h1>
+    <p class="lead">This page contains the all the polling stations that are registered in the system</p>
+  </div>
+</div>
 
 
 <div class="container mt-3">
@@ -15,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let pollingStation of pollingStations; let i = index">
+        <tr *ngFor="let pollingStation of pollingStations; let i = index" [routerLink]="[ '/polling-station/view', pollingStation.pollingStationId ]">
           <th scope="row">{{i+1}}</th>
           <td>{{pollingStation.name}}</td>
           <td>{{pollingStation.address}}</td>
