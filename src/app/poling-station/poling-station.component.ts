@@ -46,6 +46,7 @@ export class PolingStationComponent implements OnInit {
       this.loading = false;
       this.success = true;
       this.failed = false;
+      this.pollingStation = new PollingStation();
     }, err => {
       this.loading = false;
       this.failed = true;

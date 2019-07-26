@@ -27,7 +27,7 @@ export class NewElectionComponent implements OnInit {
   politicians:Politician[]=[]
   pollingStations:PollingStation[]=[]
   meridian = true;
-  electionDate:Date;
+  electionDate:Date = new Date();
   name:string = '';
   wizPage:number = 0;
   candidates:string[] = [];
@@ -45,7 +45,6 @@ export class NewElectionComponent implements OnInit {
   constructor(private politicianService:PoliticianService, private generator:IdGenerateService, private electionService:ElectionService, private divisionService:DivisionService, private removeNamespaceService:RemoveNamespaceService, private router:Router) { }
 
   ngOnInit() {
-    this.electionDate = new Date();
     this.allPoliticians = []
     this.electionService.viewAllElections().subscribe(elecs => {
       this.elecNames = []
@@ -169,6 +168,9 @@ export class NewElectionComponent implements OnInit {
   prevBtn(){
     if(this.wizPage>0){
       this.wizPage--;
+      if(this.wizPage == 1){
+        this.selectedPoliticians = []
+      }
     }
     console.log(this.wizPage)
 
@@ -179,12 +181,12 @@ export class NewElectionComponent implements OnInit {
 
     if(name != ""){
       if(this.elecNames.includes(name)){
-        this.msg = "Warning : Division name already exist !!"
+        this.msg = "Warning : Election name already exist !!"
       }else{
         this.msg = ""
       }
     }else{
-      this.msg = "Division name is required!!"
+      this.msg = "Election name is required!!"
     }
   }
 }

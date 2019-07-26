@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.polService.getPollingStation(sessionStorage.getItem("pollingStation")).subscribe(ps => {
       if(ps.pollingStationId == sessionStorage.getItem("pollingStation")){
-      this.polService.authenticated = true;
+        this.polService.authenticated = true;
 
       }
     },err=>{

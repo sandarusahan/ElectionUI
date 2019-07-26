@@ -80,8 +80,21 @@ export class ResultDetailsComponent implements OnInit {
               dist.district = division.district;
               dist.votes = bals.length;
             this.divisions.push(div);
-            this.provinceVotes.push(prov)
-            this.districtVotes.push(dist)
+            let p = this.provinceVotes.filter(x => x.province == prov.province)
+            if(p.length==0){
+              this.provinceVotes.push(prov)
+            }else{
+              prov.votes = prov.votes + p[1].votes
+              this.provinceVotes.push(prov)
+            }
+
+            let d = this.districtVotes.filter(x => x.district == dist.district)
+            if(d.length==0){
+              this.districtVotes.push(dist)
+            }else{
+              dist.votes = dist.votes + d[1].votes
+              this.districtVotes.push(div)
+            }
           })
         })
         this.onProvinceTab();

@@ -44,7 +44,7 @@ export class VoteSummaryComponent implements OnInit {
   ngOnInit() {
     
     this.vote = this.data.vote
-    console.log(this.data.vote.election);
+    console.log(this.data.vote.election.electionId);
     this.pollService.getPollingStation(sessionStorage.getItem('pollingStation')).subscribe(poll =>{
       this.voteKeys = [];
       poll.voteKeys.forEach(key => {
@@ -53,9 +53,10 @@ export class VoteSummaryComponent implements OnInit {
     })
 
     this.voteKeyService.getAllVotedKeysByPollingStions("resource:org.evotedapp.biznet.PollingStation#"+sessionStorage.getItem('pollingStation'), "resource:org.evotedapp.biznet.Election#"+this.vote.election.electionId).subscribe(keys => {
-      this.votedKeys = [];
+      this.voteKeys = []
       keys.forEach(key => this.votedKeys.push(key.votedKey))
       
+      console.log("hey",keys)
 
     })
   }
